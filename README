@@ -1,0 +1,11 @@
+A simple JavaScript-like toy language compiler and stack-based virtual machine (see vm.txt and tools/vm.py) written mostly for educational purposes (and fun).
+
+The compiler (written in Rust) and VM (currently written in Python) implement a small subset of ECMAScript, not strictly following the reference, though. Take a look at samples directory to get an idea on what is implemented. The VM doesn't currently perform perform any garbage collection, and is useful only for debugging purposes.
+
+Usage:
+$ cargo run -- -c samples/this.js # compile
+$ tools/vm.py this.bin # run compiled binary
+$ tools/vm.py -r this.bin # run in command line debug mode 
+$ cargo run -- -t samples/this.js -o this.txt # run lexer on source file
+$ cargo run -- -p samples/this.js -o this.dot # run parser on source file and dump AST in graphviz dot format
+

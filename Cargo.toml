@@ -1,0 +1,9 @@
+[package]
+name = "ecmascript_toy"
+version = "0.1.0"
+authors = ["Alexey Denisov <rtgbnm@gmail.com>"]
+
+[dependencies]
+byteorder = "1"
+getopts = "0.2"
+

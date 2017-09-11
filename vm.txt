@@ -1,0 +1,60 @@
+
+SP    Operation    Args                            Comment
+====================================================================================================
+STACK 
+
++1    push_float   value: f32                      Push float to the stack
++1    push_str     length: u32                     Push UTF-8 encoded string to the stack
+                   string: u8[]
++1    push_int     value: u32                      Push unsigned int to the stack
++1    push_fn      parent_frames_count: u32        Push function to the stack
+                   parent_frames_offset: u32
+		   own_frame_size: u32
++1    take         offset: u32                     Take value at the specified offset from the top of the stack
+ 0    swap         offset1: u32                    Swap values at the specified offsets on the stack 
+                   offset2: u32
+-n    pop	   count: u32                      Remove N values from the top of the stack
+
+SP    Operation    Args                            Comment
+====================================================================================================
+MEMORY
+
+ 0   load          offset: u32                     Load value from the heap at addr + offset and push it to stack 
+                   [addr: u32 or ref]
+-2   store         offset: u32                     Store value on the heap at addr + offset
+                   [addr: ref]                     Store value in the object if addr is an empty reference to the object field
+                   [value: any]                    
+
+SP    Operation    Args                            Comment
+====================================================================================================
+CONTROL
+
+-2    jump_if      [addr: u32]                     Jump to addr if condition is true 
+                   [condition: f32]
+-1    jump         [addr: u32]                     Jump to addr
+-n    call         n_args: u32                     Call function at addr and set up its evironment
+                   [addr: ref]
+		   [args...]
+
+
+SP    Operation    Args                            Comment
+====================================================================================================
+ARITHMETIC AND LOGIC OPS
+
+Implemented operations:
+<, >, ==, <=, >=, &&, ||, !
+
+Booleans are implemented implicitly via floats
+Reference comparsion and bitwise ops are not implemented
+
+SP    Operation    Args                            Comment
+====================================================================================================
+OBJECT OPERATIONS
+
+-1  get            [object: ref]                   Get value from the object and put its reference on the stack
+                   [key: u32\string]               
+-n  push_dict      length: u32                     Create a new object and push its reference to the stack
+                   [key-value pairs..]
+-n  push_array     length: u32                     Create a new array object and push its reference to the stack
+                   [values ..]
+
